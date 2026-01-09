@@ -11,30 +11,28 @@ on:
 
 jobs:
   backend-tests:
-    name: Backend Tests
-    runs-on: ubuntu-latest
+  name: Backend Tests
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
 
-      - name: Install backend dependencies
-        working-directory: backend
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+    - name: Install backend dependencies
+      working-directory: backend
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Run backend tests
-        working-directory: backend
-        run: |
-          source venv/bin/activate
-          pytest
+    - name: Run backend tests
+      working-directory: backend
+      run: pytest
+
 
   frontend-tests:
     name: Frontend E2E Tests
